@@ -420,21 +420,26 @@ function homeAgents() {
       scrollTrigger: { trigger: inner, start: "top center", end: "top top", scrub: 1 },
     }
   );
-  gsap.fromTo(
-    texts,
-    { opacity: 0.3, scale: 0.8 },
-    {
-      opacity: 1,
-      scale: 1,
-      scrollTrigger: {
-        trigger: inner,
-        start: "top top",
-        end: "+=" + window.innerHeight * (mobile ? 1.3 : 1.5),
-        scrub: 1,
-        pin: true,
-      },
-    }
-  );
+  // Pinned: the heading settles, then the "why choose us" cards rise in one by one.
+  const cards = $$(".why-card", section);
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: inner,
+      start: "top top",
+      end: "+=" + window.innerHeight * (mobile ? 1.3 : 1.5),
+      scrub: 1,
+      pin: true,
+    },
+  });
+  tl.fromTo(texts, { opacity: 0.3, scale: 0.8 }, { opacity: 1, scale: 1, duration: 1 }, 0);
+  if (cards.length) {
+    tl.fromTo(
+      cards,
+      { opacity: 0, y: 60 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" },
+      0.35
+    );
+  }
 }
 
 function whoWeAre() {

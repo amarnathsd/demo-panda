@@ -2,13 +2,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RequestDialog from "@/components/RequestDialog";
 import SiteEffects from "@/components/SiteEffects";
-import { getAllPages } from "@/lib/content";
+import { ROUTES } from "@/lib/routes";
 import "./globals.css";
 
 // The theme CSS keys off page body classes, and light-topped pages need the dark
 // header. Set both before first paint; <BodyClass> keeps them in sync on navigation.
 const bodyClassScript = () => {
-  const map = Object.fromEntries(getAllPages().map((p) => [p.route, [p.bodyClass, p.header]]));
+  const map = Object.fromEntries(Object.entries(ROUTES).map(([route, r]) => [route, [r.bodyClass, r.header ?? "light"]]));
   return `(function(){var m=${JSON.stringify(map)};var p=location.pathname.replace(/\\/+$/,"")||"/";var v=m[p]||["","light"];document.body.className=v[0];document.documentElement.dataset.header=v[1];})();`;
 };
 
