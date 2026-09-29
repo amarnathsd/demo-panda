@@ -1,0 +1,1 @@
+import{c as t,j as r}from"./index-ZavE6wyR.js";import m from"./BookNow-BUUCWswX.js";import"PricingSection-etZOrDNF.js";import"iconBase-X4fiEg7p.js";import"clsx-B-dksMZM.js";import"floating-ui.dom-CQDleePo.js";import"BounceLoader%20-yaZk62gV.js";const n=()=>{const{code:o}=t();return r.jsx(m,{codeFromPath:o})};export{n as default};

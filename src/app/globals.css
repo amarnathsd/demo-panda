@@ -1,26 +1,733 @@
-@import "tailwindcss";
+/*
+ * Styles for the parts rebuilt in React (request form) and page additions.
+ * Everything else comes from the original theme stylesheet, linked in layout.js:
+ * /public/theme/css/theme.css
+ * (Tailwind is intentionally not imported: its reset would fight the theme.)
+ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-ink: #1a1a1a;
+  --brand-gold: #bea380;
+  --brand-gold-dark: #a88863;
+  --brand-paper: #efefef;
+  --brand-serif: "Dream Avenue", serif;
+  --brand-sans: basis-grotesque-regular-pro, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------------------------------------------------------------- request form */
+
+.rf {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  color: var(--brand-ink);
+  font-family: var(--brand-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.rf-progress {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.rf-progress__bar {
+  position: relative;
+  flex: 0 0 160px;
+  height: 1px;
+  background: rgba(26, 26, 26, 0.2);
+}
+
+.rf-progress__bar span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--brand-gold);
+  transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.rf-title {
+  margin: 0;
+  font-family: var(--brand-serif);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 1rem + 2.5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.rf-kicker {
+  margin: 0;
+  letter-spacing: 0.2em;
+  color: var(--brand-gold-dark);
+}
+
+.rf-text {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.rf--done {
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+}
+
+.rf-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.rf-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+}
+
+.rf-input {
+  width: 100%;
+  padding: 0.9rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0.05em;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.rf-input:focus {
+  border-color: var(--brand-gold);
+}
+
+.rf-input::placeholder {
+  color: rgba(26, 26, 26, 0.55);
+}
+
+.rf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 2.5rem;
+}
+
+.rf-grid__full {
+  grid-column: 1 / -1;
+}
+
+.rf-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 4rem;
+}
+
+.rf-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.rf-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.rf-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rf-option span {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.rf-option:hover span,
+.rf-option input:focus-visible + span {
+  border-color: var(--brand-gold);
+}
+
+.rf-option.is-selected span {
+  background: var(--brand-ink);
+  border-color: var(--brand-ink);
+  color: #fff;
+}
+
+.rf-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.rf-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand-gold);
+}
+
+.rf-counter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.rf-counter__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.rf-counter__controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: border-color 0.3s, opacity 0.3s;
+}
+
+.rf-counter__controls button:hover:not(:disabled) {
+  border-color: var(--brand-gold);
+}
+
+.rf-counter__controls button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.rf-counter__value {
+  min-width: 2ch;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.rf-error {
+  margin: 0;
+  color: #a33b2b;
+  font-size: 0.9rem;
+}
+
+.rf-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.rf-btn {
+  padding: 1rem 2.6rem;
+  border: 1px solid var(--brand-ink);
+  background: var(--brand-ink);
+  color: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.rf-btn:hover:not(:disabled) {
+  background: transparent;
+  color: var(--brand-ink);
+}
+
+.rf-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.rf-btn--ghost {
+  background: transparent;
+  color: var(--brand-ink);
+}
+
+.rf-btn--ghost:hover {
+  background: var(--brand-ink);
+  color: #fff;
+}
+
+/* inline flatpickr calendar */
+.rf-calendar input {
+  display: none;
+}
+
+.rf-calendar {
+  width: 100%;
+}
+
+.rf-calendar .flatpickr-calendar.inline {
+  box-shadow: none;
+  background: transparent;
+}
+
+.rf-calendar .flatpickr-day.inRange {
+  background: rgba(190, 163, 128, 0.25);
+  border-color: transparent;
+  box-shadow: -5px 0 0 rgba(190, 163, 128, 0.25), 5px 0 0 rgba(190, 163, 128, 0.25);
+}
+
+.rf-calendar.is-disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* react-select (unstyled mode) */
+.rf-select__control {
+  min-height: 52px;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.rf-select__control--is-focused {
+  border-color: var(--brand-gold);
+}
+
+.rf-select__placeholder {
+  color: rgba(26, 26, 26, 0.55);
+  letter-spacing: 0.05em;
+}
+
+.rf-select__value-container {
+  gap: 0.4rem;
+  padding: 0.4rem 0;
+}
+
+.rf-select__multi-value {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.4rem 0.25rem 0.75rem;
+  background: var(--brand-ink);
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.rf-select__multi-value__remove:hover {
+  color: var(--brand-gold);
+}
+
+.rf-select__indicator {
+  padding: 0 0.25rem;
+  color: rgba(26, 26, 26, 0.6);
+}
+
+.rf-select__menu {
+  margin-top: 0.4rem;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(26, 26, 26, 0.12);
+}
+
+.rf-select__option {
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+}
+
+.rf-select__option--is-focused {
+  background: rgba(190, 163, 128, 0.18);
+}
+
+.rf-select__option--is-selected {
+  background: var(--brand-ink);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .rf {
+    gap: 1.5rem;
+  }
+
+  .rf-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rf-option span {
+    padding: 0.7rem 1.1rem;
+  }
+
+  .rf-nav {
+    justify-content: space-between;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* React-mounted forms inside page dialogs */
+.request-form-mount {
+  width: 100%;
+}
+
+/* ---------------------------------------------------------------- page additions */
+
+/* Home hero uses a photo where the theme expects a video. */
+#home_featured .featured_background .featured-media {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  object-fit: cover;
+  filter: brightness(0.75);
+}
+
+/* The panda logo artwork has built-in padding, so it needs more width than the theme's. */
+html body .site-header .header_wrapper > .wrapper .header_left .logo-wrapper .logo-img {
+  width: 190px;
+  max-width: none;
+}
+
+@media (max-width: 991px) {
+  html body .site-header .header_wrapper > .wrapper .header_left .logo-wrapper .logo-img {
+    width: 150px;
+  }
+}
+
+footer .footer_wrapper .footer-content-wrapper .footer_left .logo-img {
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Pages with a light top use the theme's dark header (same rules as .black-header). */
+html[data-header="dark"] .site-header:not(.scrolled):not(.openmenu) .header_phone_wrapper a img,
+html[data-header="dark"] .site-header:not(.scrolled):not(.openmenu) .logo-img {
+  filter: brightness(0);
+}
+
+html[data-header="dark"] .site-header:not(.scrolled):not(.openmenu) .wrapper .header_right .menu_button_wrapper .menu_button .line {
+  background-color: #1a1a1a;
+}
+
+/* Destination icons in the footer marquee */
+footer .footer_wrapper .footer-banner-wrapper .swiper.marquee-swiper .swiper-slide > img.footer-destination-icon {
+  max-height: 90px;
+}
+
+.footer-tagline {
+  max-width: 360px;
+  margin: 1.5rem 0 0;
+  opacity: 0.8;
+}
+
+/* Trustpilot link under the reviews slider */
+.reviews-source {
+  position: relative;
+  z-index: 1;
+  margin: 2rem 0 0;
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+
+.reviews-source a {
+  color: var(--brand-gold-dark);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* About: milestones intro / outro */
+.about-team-intro {
+  max-width: 860px;
+  margin: 1.5rem auto 3rem;
+  padding-inline: 1.5rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+/* Services: travel insurance note */
+.service-note {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Pricing list */
+.pricing-list h3 {
+  margin: 2.5rem 0 0.75rem;
+  font-family: var(--brand-serif);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 1rem + 1vw, 2rem);
+}
+
+/* FAQ board: category rail pinned beside the questions (behaviour in lib/site/faq.js) */
+.faq-intro {
+  max-width: 780px;
+  margin: 1.5rem auto 4rem;
+}
+
+.faq-board__layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: start;
+}
+
+.faq-nav {
+  z-index: 5;
+}
+
+.faq-nav__inner {
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(26, 26, 26, 0.08);
+}
+
+.faq-search input {
+  width: 100%;
+  padding: 0.85rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%231a1a1a' stroke-width='1.6' d='M10.5 18a7.5 7.5 0 1 0 0-15a7.5 7.5 0 0 0 0 15zm5.3-2.2L21 21'/%3E%3C/svg%3E") no-repeat right center;
+  font: inherit;
+  letter-spacing: 0.04em;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.faq-search input:focus {
+  border-color: var(--brand-gold);
+}
+
+.faq-nav__label {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.faq-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.faq-nav__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.2rem 36px 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0.25rem;
+  color: var(--brand-ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+  transition: color 0.35s, opacity 0.35s, padding 0.35s;
+}
+
+.faq-nav__item:hover {
+  padding-left: 0.6rem;
+}
+
+.faq-nav__num {
+  font-family: var(--brand-serif);
+  font-size: 1.1rem;
+  opacity: 0.45;
+  transition: opacity 0.35s, color 0.35s;
+}
+
+.faq-nav__icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.55;
+  transition: filter 0.35s, opacity 0.35s, transform 0.35s;
+}
+
+.faq-nav__name {
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.faq-nav__count {
+  min-width: 2rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: var(--brand-paper);
+  font-size: 0.75rem;
+  text-align: center;
+  transition: background 0.35s, color 0.35s;
+}
+
+.faq-nav__progress {
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 2px;
+  overflow: hidden;
+}
+
+.faq-nav__progress i {
+  display: block;
+  height: 100%;
+  background: var(--brand-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.faq-nav__item.is-active .faq-nav__num {
+  opacity: 1;
+  color: var(--brand-gold-dark);
+}
+
+.faq-nav__item.is-active .faq-nav__icon,
+.faq-nav__item:hover .faq-nav__icon {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.faq-nav__item.is-active .faq-nav__count {
+  background: var(--brand-ink);
+  color: #fff;
+}
+
+.faq-nav__item.is-empty {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.faq-group {
+  margin-bottom: 5rem;
+}
+
+.faq-group[hidden],
+.faq-board [data-accordion-item][hidden] {
+  display: none !important;
+}
+
+.faq-group__title {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  font-family: var(--brand-serif);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 1rem + 1.8vw, 2.8rem);
+}
+
+.faq-group__num {
+  color: var(--brand-gold);
+  font-size: 0.55em;
+}
+
+#faq-content.faq-board .faq-wrapper {
+  padding-top: 1.5rem;
+}
+
+.faq-empty {
+  margin: 0 0 3rem;
+  font-size: 1.1rem;
+}
+
+.faq-empty a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Tablet / mobile: the rail becomes a pinned row of chips. */
+@media (max-width: 991px) {
+  .faq-board__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .faq-nav__inner {
+    padding: 0.75rem 0 0.75rem;
+    background: var(--brand-paper);
+    box-shadow: 0 10px 20px -18px rgba(26, 26, 26, 0.5);
+  }
+
+  .faq-nav__label {
+    display: none;
+  }
+
+  .faq-search input {
+    padding: 0.6rem 0;
+  }
+
+  .faq-nav__list {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .faq-nav__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .faq-nav__item {
+    grid-template-columns: 24px auto auto;
+    gap: 0.45rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(26, 26, 26, 0.15);
+    border-radius: 999px;
+    background: #fff;
+    white-space: nowrap;
+  }
+
+  .faq-nav__item:hover {
+    padding-left: 0.8rem;
+  }
+
+  .faq-nav__num,
+  .faq-nav__progress {
+    display: none;
+  }
+
+  .faq-nav__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .faq-nav__name {
+    font-size: 0.8rem;
+  }
+
+  .faq-nav__item.is-active {
+    border-color: var(--brand-ink);
+    background: var(--brand-ink);
+    color: #fff;
+  }
+
+  .faq-nav__item.is-active .faq-nav__count {
+    background: #fff;
+    color: var(--brand-ink);
+  }
+}
+
+/* Contact form */
+.contact-intro {
+  margin: 0 auto 2.5rem;
+}
+
+.contact-form__message {
+  min-height: 1.2em;
+  margin: 1rem 0 0;
+}
+
+/* Request dialog: field groups */
+.rf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.rf-check a {
+  color: inherit;
+  text-decoration: underline;
 }

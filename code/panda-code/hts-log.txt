@@ -1,0 +1,15 @@
+HTTrack3.50-2 launched on Tue, 29 Sep 2026 11:26:53 at https://theflyingpanda.io/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2%f#f -F "Mozilla/5.0 (compatible; HTTrack; +https://www.httrack.com/)" -%F "<!-- Mirrored from {url} by HTTrack Website Copier/3.x [XR&CO], {date} -->" -%l "en, *" https://theflyingpanda.io/ -O1 "D:\refrence-websites\panda-code" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+11:27:06	Warning: 	Warning: store text/html without scan: D:/refrence-websites/panda-code/theflyingpanda.io/chunk.CPjt2gOg.html
+11:27:06	Warning: 	Warning: store text/html without scan: D:/refrence-websites/panda-code/theflyingpanda.io/constants.html
+11:27:06	Warning: 	Warning: store text/html without scan: D:/refrence-websites/panda-code/theflyingpanda.io/xhr.html
+11:27:06	Warning: 	Warning: store text/html without scan: D:/refrence-websites/panda-code/theflyingpanda.io/lib/widget-management.html
+
+HTTrack Website Copier/3.50-2 mirror complete in 21 seconds : 42 links scanned, 41 files written (1344981 bytes overall) [440191 bytes received at 20961 bytes/sec], 1345040 bytes transferred using HTTP compression in 42 files, ratio 30%, 7.1 requests per connection
+(No errors, 4 warnings, 0 messages)

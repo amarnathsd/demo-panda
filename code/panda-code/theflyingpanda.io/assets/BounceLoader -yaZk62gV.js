@@ -1,0 +1,1 @@
+import{j as e}from"./index-ZavE6wyR.js";const n=()=>e.jsx("div",{className:"flex items-center  justify-center p-5",children:e.jsx("div",{className:"flex space-x-2",children:[0,1,2,3].map(s=>e.jsx("div",{className:"w-3 h-3 rounded-full bg-[#011e41] animate-bounce",style:{animationDelay:`${s*.15}s`,animationDuration:"0.8s"}},s))})});export{n as B};

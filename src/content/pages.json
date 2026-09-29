@@ -1,0 +1,74 @@
+[
+  {
+    "route": "/",
+    "slug": "home",
+    "title": "The Flying Panda – Your Partner in Seamless Visa Solutions",
+    "description": "Our mission is to make visa processes as seamless as possible, offering personalized solutions that cater to the unique needs of each traveler.",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "home page",
+    "header": "light"
+  },
+  {
+    "route": "/aboutus",
+    "slug": "aboutus",
+    "title": "About Us – The Flying Panda",
+    "description": "Today, The Flying Panda harnesses cutting-edge technologies to streamline visa acquisition, mitigate bureaucratic delays, and empower travelers to pursue their aspirations without undue administrative constraints. Our mission is to make visa processes as seamless as possible, offering personalized s",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-about",
+    "header": "light"
+  },
+  {
+    "route": "/services",
+    "slug": "services",
+    "title": "Our Services – The Flying Panda",
+    "description": "At The Flying Panda, we offer an extensive suite of travel-related services, meticulously designed to facilitate a seamless and efficient travel experience. With our expertise, attention to detail, and personalized approach, we ensure every aspect of your journey is handled with precision, allowing ",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-template-tmpl_concierge",
+    "header": "light"
+  },
+  {
+    "route": "/pricing",
+    "slug": "pricing",
+    "title": "Our Pricing – The Flying Panda",
+    "description": "At The Flying Panda, we offer transparent and flexible pricing to accommodate the diverse needs of travellers. Below is a summary of our pricing structure to help you understand our offerings in detail.",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-template-tmpl_sustainability",
+    "header": "light"
+  },
+  {
+    "route": "/faq",
+    "slug": "faq",
+    "title": "FAQs – The Flying Panda",
+    "description": "Here are a few of the questions we get the most. If you don’t see what’s on your mind, reach out to us anytime on phone, chat, or email.",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-template-tmpl_faq",
+    "header": "dark"
+  },
+  {
+    "route": "/contact",
+    "slug": "contact",
+    "title": "Contact – The Flying Panda",
+    "description": "We welcome your inquiries and look forward to connecting with you",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-template-tmpl_contact",
+    "header": "dark"
+  },
+  {
+    "route": "/privacy-policy",
+    "slug": "privacy-policy",
+    "title": "Privacy Policy – The Flying Panda",
+    "description": "Policy on Personal Data Processing",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-template-tmpl_policy",
+    "header": "dark"
+  },
+  {
+    "route": "/terms",
+    "slug": "terms",
+    "title": "Terms of Service – The Flying Panda",
+    "description": "Terms of Service",
+    "ogImage": "/images/photos/lofoten-islands.webp",
+    "bodyClass": "page page-template-tmpl_policy",
+    "header": "dark"
+  }
+]
